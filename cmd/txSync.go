@@ -29,8 +29,8 @@ func handleSendTxMessageSync(c echo.Context) error {
 		m = r
 	}
 
-	// Get the cached tx template.
-	tpl, err := app.manager.GetTpl(m.TemplateID)
+	// Get the tx template.
+	tpl, err := app.core.GetTemplate(m.TemplateID, false)
 	if err != nil {
 		return echo.NewHTTPError(http.StatusBadRequest,
 			app.i18n.Ts("globals.messages.notFound", "name", fmt.Sprintf("template %d", m.TemplateID)))
@@ -48,7 +48,7 @@ func handleSendTxMessageSync(c echo.Context) error {
 	}
 
 	// Render the message.
-	if err := m.Render(sub, tpl); err != nil {
+	if err := m.Render(sub, &tpl); err != nil {
 		return echo.NewHTTPError(http.StatusBadRequest,
 			app.i18n.Ts("globals.messages.errorFetching", "name"))
 	}
@@ -75,7 +75,7 @@ func handleSendTxMessageSync(c echo.Context) error {
 	err = app.messengers[m.Messenger].Push(msg)
 	if err != nil {
 		app.log.Printf("error sending message '%s': %v", msg.Subject, err)
-		if (err.Error() == "timed out waiting for free conn in pool") {
+		if err.Error() == "timed out waiting for free conn in pool" {
 			return echo.NewHTTPError(http.StatusTooManyRequests, err.Error())
 		}
 		return echo.NewHTTPError(http.StatusInternalServerError, err.Error())

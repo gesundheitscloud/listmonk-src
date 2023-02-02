@@ -176,12 +176,6 @@ func handleCreateTemplate(c echo.Context) error {
 		return err
 	}
 
-	// If it's a transactional template, cache it in the manager
-	// to be used for arbitrary incoming tx message pushes.
-	if o.Type == models.TemplateTypeTx {
-		app.manager.CacheTpl(out.ID, &o)
-	}
-
 	return c.JSON(http.StatusOK, okResp{out})
 }
 
@@ -226,11 +220,6 @@ func handleUpdateTemplate(c echo.Context) error {
 		return err
 	}
 
-	// If it's a transactional template, cache it.
-	if o.Type == models.TemplateTypeTx {
-		app.manager.CacheTpl(out.ID, &o)
-	}
-
 	return c.JSON(http.StatusOK, okResp{out})
 
 }
@@ -267,9 +256,6 @@ func handleDeleteTemplate(c echo.Context) error {
 	if err := app.core.DeleteTemplate(id); err != nil {
 		return err
 	}
-
-	// Delete cached template.
-	app.manager.DeleteTpl(id)
 
 	return c.JSON(http.StatusOK, okResp{true})
 }

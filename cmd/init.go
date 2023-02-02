@@ -432,22 +432,6 @@ func initCampaignManager(q *models.Queries, cs *constants, app *App) *manager.Ma
 	}, newManagerStore(q), campNotifCB, app.i18n, lo)
 }
 
-func initTxTemplates(m *manager.Manager, app *App) {
-	tpls, err := app.core.GetTemplates(models.TemplateTypeTx, false)
-	if err != nil {
-		lo.Fatalf("error loading transactional templates: %v", err)
-	}
-
-	for _, t := range tpls {
-		tpl := t
-		if err := tpl.Compile(app.manager.GenericTemplateFuncs()); err != nil {
-			lo.Printf("error compiling transactional template %d: %v", tpl.ID, err)
-			continue
-		}
-		m.CacheTpl(tpl.ID, &tpl)
-	}
-}
-
 // initImporter initializes the bulk subscriber importer.
 func initImporter(q *models.Queries, db *sqlx.DB, app *App) *subimporter.Importer {
 	return subimporter.New(

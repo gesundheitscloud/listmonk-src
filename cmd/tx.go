@@ -29,8 +29,8 @@ func handleSendTxMessage(c echo.Context) error {
 		m = r
 	}
 
-	// Get the cached tx template.
-	tpl, err := app.manager.GetTpl(m.TemplateID)
+	// Get the tx template.
+	tpl, err := app.core.GetTemplate(m.TemplateID, false)
 	if err != nil {
 		return echo.NewHTTPError(http.StatusBadRequest,
 			app.i18n.Ts("globals.messages.notFound", "name", fmt.Sprintf("template %d", m.TemplateID)))
@@ -48,7 +48,7 @@ func handleSendTxMessage(c echo.Context) error {
 	}
 
 	// Render the message.
-	if err := m.Render(sub, tpl); err != nil {
+	if err := m.Render(sub, &tpl); err != nil {
 		return echo.NewHTTPError(http.StatusBadRequest,
 			app.i18n.Ts("globals.messages.errorFetching", "name"))
 	}
