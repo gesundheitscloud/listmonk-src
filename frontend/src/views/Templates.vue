@@ -67,6 +67,11 @@
               <b-icon icon="pencil-outline" size="is-small" />
             </b-tooltip>
           </a>
+          <a href="#" @click.prevent="showTestMailModal(props.row)" data-cy="btn-sendtest">
+            <b-tooltip :label="$t('globals.buttons.sendtest')" type="is-dark">
+              <b-icon icon="email-outline" size="is-small" />
+            </b-tooltip>
+          </a>
           <a href="" @click.prevent="$utils.prompt(`Clone template`,
               { placeholder: 'Name', value: `Copy of ${props.row.name}`},
               (name) => cloneTemplate(name, props.row))"
@@ -117,6 +122,21 @@
       :templateType="previewItem.type"
       :title="previewItem.name"
       @close="closePreview"></campaign-preview>
+
+    <b-modal
+      v-model="isTestMailModalVisible"
+      has-modal-card
+      trap-focus
+      :destroy-on-hide="false"
+      aria-role="dialog"
+      aria-label="Example Modal"
+      close-button-aria-label="Close"
+      aria-modal>
+      <send-test-mail :data="curItem"
+        @close="isTestMailModalVisible = false">
+      </send-test-mail>
+    </b-modal>
+
   </section>
 </template>
 
@@ -126,12 +146,14 @@ import { mapState } from 'vuex';
 import TemplateForm from './TemplateForm.vue';
 import CampaignPreview from '../components/CampaignPreview.vue';
 import EmptyPlaceholder from '../components/EmptyPlaceholder.vue';
+import SendTestMail from './SendTestMail.vue';
 
 export default Vue.extend({
   components: {
     CampaignPreview,
     TemplateForm,
     EmptyPlaceholder,
+    SendTestMail,
   },
 
   data() {
@@ -139,6 +161,7 @@ export default Vue.extend({
       curItem: null,
       isEditing: false,
       isFormVisible: false,
+      isTestMailModalVisible: false,
       previewItem: null,
     };
   },
@@ -156,6 +179,12 @@ export default Vue.extend({
       this.curItem = { type: 'campaign' };
       this.isFormVisible = true;
       this.isEditing = false;
+    },
+
+    // Show the test mail modal.
+    showTestMailModal(data) {
+      this.curItem = data;
+      this.isTestMailModalVisible = true;
     },
 
     formFinished() {
