@@ -267,6 +267,9 @@ export const makeTemplateDefault = async (id) => http.put(`/api/templates/${id}/
 export const deleteTemplate = async (id) => http.delete(`/api/templates/${id}`,
   { loading: models.templates });
 
+// Send template.
+export const sendTxSync = async (data) => http.post('/api/custom/txsync', data, {});
+
 // Settings.
 export const getServerConfig = async () => http.get('/api/config',
   { loading: models.serverConfig, store: models.serverConfig, camelCase: false });
