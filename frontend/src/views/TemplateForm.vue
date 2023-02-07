@@ -6,7 +6,8 @@
             <b-button @click="previewTemplate"
               class="is-pulled-right" type="is-primary"
               icon-left="file-find-outline">{{ $t('templates.preview') }}</b-button>
-            <template v-if="isEditing">
+
+              <template v-if="isEditing">
               <h4>{{ data.name }}</h4>
               <p class="has-text-grey is-size-7">
                 {{ $t('globals.fields.id') }}: <span data-cy="id">{{ data.id }}</span>
