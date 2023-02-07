@@ -529,7 +529,7 @@
     "templates.newTemplate": "Nueva plantilla",
     "templates.placeholderHelp": "El marcador {placeholder} debe aparecer exactamente una vez en la plantilla.",
     "templates.preview": "Vista previa",
-    "templates.sendtest": "Enviar una prueba",
+    "templates.sendtest": "Enviar un e-mail de prueba",
     "templates.rawHTML": "HTML de orige",
     "templates.subject": "Asunto",
     "users.login": "Ingresar",

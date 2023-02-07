@@ -529,7 +529,7 @@
     "templates.newTemplate": "Neue Vorlage",
     "templates.placeholderHelp": "Der Platzhalter \"{placeholder}\" darf nur einmal im Template vorkommen.",
     "templates.preview": "Vorschau",
-    "templates.sendtest": "Einen Test senden",
+    "templates.sendtest": "Eine Test-E-Mail senden",
     "templates.rawHTML": "HTML",
     "templates.subject": "Betreff",
     "users.login": "Anmelden",

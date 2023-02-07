@@ -529,7 +529,7 @@
     "templates.newTemplate": "Novo modelo",
     "templates.placeholderHelp": "O palavra reservada {placeholder} deve aparecer exatamente uma vez no modelo.",
     "templates.preview": "Pré-visualizar",
-    "templates.sendtest": "Enviar um teste",
+    "templates.sendtest": "Enviar um e-mail de teste",
     "templates.rawHTML": "Código HTML",
     "templates.subject": "Assunto",
     "users.login": "Login",

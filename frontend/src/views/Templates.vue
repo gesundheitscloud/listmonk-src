@@ -67,11 +67,15 @@
               <b-icon icon="pencil-outline" size="is-small" />
             </b-tooltip>
           </a>
-          <a href="#" @click.prevent="showTestMailModal(props.row)" data-cy="btn-sendtest">
+          <a v-if="props.row.type == 'tx'" href="#" 
+            @click.prevent="showTestMailModal(props.row)" data-cy="btn-sendtest">
             <b-tooltip :label="$t('globals.buttons.sendtest')" type="is-dark">
               <b-icon icon="email-outline" size="is-small" />
             </b-tooltip>
           </a>
+          <span v-else class="a has-text-grey-light">
+              <b-icon icon="email-outline" size="is-small" />
+          </span>
           <a href="" @click.prevent="$utils.prompt(`Clone template`,
               { placeholder: 'Name', value: `Copy of ${props.row.name}`},
               (name) => cloneTemplate(name, props.row))"
@@ -127,10 +131,7 @@
       v-model="isTestMailModalVisible"
       has-modal-card
       trap-focus
-      :destroy-on-hide="false"
-      aria-role="dialog"
-      aria-label="Example Modal"
-      close-button-aria-label="Close"
+      :destroy-on-hide="true"
       aria-modal>
       <send-test-mail :data="curItem"
         @close="isTestMailModalVisible = false">

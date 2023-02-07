@@ -529,7 +529,7 @@
     "templates.newTemplate": "Nouveau modèle",
     "templates.placeholderHelp": "L'espace réservé {placeholder} doit apparaître exactement une fois dans le modèle.",
     "templates.preview": "Aperçu",
-    "templates.sendtest": "Envoyer un test",
+    "templates.sendtest": "Envoyer un email de test",
     "templates.rawHTML": "HTML brut",
     "templates.subject": "Objet",
     "users.login": "Connecter",

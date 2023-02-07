@@ -529,7 +529,7 @@
     "templates.newTemplate": "Nuovo modello",
     "templates.placeholderHelp": "Il segnaposto {placeholder} deve apparire esattamente una volta nel modello.",
     "templates.preview": "Anteprima",
-    "templates.sendtest": "Invia una prova",
+    "templates.sendtest": "Invia un'email di prova",
     "templates.rawHTML": "HTML semplice",
     "templates.subject": "Subject",
     "users.login": "Login",
