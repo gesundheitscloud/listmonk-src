@@ -6,9 +6,6 @@
             <b-button @click="previewTemplate"
               class="is-pulled-right" type="is-primary"
               icon-left="file-find-outline">{{ $t('templates.preview') }}</b-button>
-            <b-button @click="previewTemplate"
-              class="is-pulled-right mr-2"
-              icon-left="rocket-launch-outline">{{ $t('templates.sendtest') }}</b-button>
             <template v-if="isEditing">
               <h4>{{ data.name }}</h4>
               <p class="has-text-grey is-size-7">
