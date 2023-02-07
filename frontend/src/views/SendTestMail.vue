@@ -8,7 +8,8 @@
                 <b-field :label="$t('settings.smtp.toEmail')" label-position="on-border">
                   <b-input
                         type="email"
-                        :value="testEmail"
+                        ref="inputTestEmail"
+                        v-model="testEmail"
                         placeholder='email@site.com'
                         required>
                   </b-input>
@@ -26,6 +27,7 @@
                     @click="$emit('close')" />
                 <b-button
                     :label="$t('globals.buttons.sendtest')"
+                    :disabled="!isFormValid"
                     type="is-primary"
                     @click.prevent="sendTest(data.id, testEmail)"/>
             </footer>
@@ -45,7 +47,14 @@ export default Vue.extend({
     return {
       testEmail: '',
       errMsg: '',
+      isFormValid: false,
     };
+  },
+
+  watch: {
+    testEmail(/* newVal, oldVal */) {
+      this.isFormValid = this.$refs.inputTestEmail.checkHtml5Validity();
+    },
   },
 
   methods: {
@@ -55,12 +64,12 @@ export default Vue.extend({
 
     sendTest(id, email) {
       this.errMsg = '';
-      console.log(id, email, this.testEmail);
       this.$api.sendTxSync({
         subscriber_email: email,
         template_id: id,
       }).then(() => {
         this.$utils.toast(this.$t('campaigns.testSent'));
+        this.close();
       }).catch((err) => {
         if (err.response?.data?.message) {
           this.errMsg = err.response.data.message;

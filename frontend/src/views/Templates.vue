@@ -67,7 +67,7 @@
               <b-icon icon="pencil-outline" size="is-small" />
             </b-tooltip>
           </a>
-          <a v-if="props.row.type == 'tx'" href="#" 
+          <a v-if="props.row.type == 'tx'" href="#"
             @click.prevent="showTestMailModal(props.row)" data-cy="btn-sendtest">
             <b-tooltip :label="$t('globals.buttons.sendtest')" type="is-dark">
               <b-icon icon="email-outline" size="is-small" />
