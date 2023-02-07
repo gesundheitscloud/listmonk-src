@@ -24,12 +24,12 @@
             <footer class="modal-card-foot">
                 <b-button
                     :label="$t('globals.buttons.close')"
-                    @click="$emit('close')" />
+                    @click="close" />
                 <b-button
                     :label="$t('globals.buttons.sendtest')"
                     :disabled="!isFormValid"
                     type="is-primary"
-                    @click.prevent="sendTest(data.id, testEmail)"/>
+                    @click.prevent="sendTest" />
             </footer>
         </div>
     </form>
@@ -62,11 +62,11 @@ export default Vue.extend({
       this.$emit('close');
     },
 
-    sendTest(id, email) {
+    sendTest() {
       this.errMsg = '';
       this.$api.sendTxSync({
-        subscriber_email: email,
-        template_id: id,
+        subscriber_email: this.testEmail,
+        template_id: this.data.id,
       }).then(() => {
         this.$utils.toast(this.$t('campaigns.testSent'));
         this.close();

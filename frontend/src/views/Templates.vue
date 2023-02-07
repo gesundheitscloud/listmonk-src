@@ -134,8 +134,7 @@
       :destroy-on-hide="true"
       aria-modal>
       <send-test-mail :data="curItem"
-        @close="isTestMailModalVisible = false">
-      </send-test-mail>
+        @close="isTestMailModalVisible = false" />
     </b-modal>
 
   </section>
